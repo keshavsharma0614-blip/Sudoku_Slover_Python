@@ -1,92 +1,37 @@
-🧩 Sudoku Solver – Python (Backtracking Algorithm)
+# 🧩 Sudoku Solver – Python (Backtracking Algorithm)
 
-This repository contains a simple and efficient Sudoku Solver implemented in Python using the backtracking algorithm.
-The project is fully contained in a single Python file, making it easy to understand, modify, and extend.
+A simple and efficient Sudoku Solver implemented in Python using the **backtracking algorithm**. Fully contained in a single file — easy to understand, modify, and extend.
 
-📌 Features
+---
 
-✔️ Solves any valid 9×9 Sudoku puzzle
+## 🚀 Overview
 
-✔️ Uses recursive backtracking
+This solver works by trying every valid number for each empty cell and recursively checking if the puzzle can be completed. If it gets stuck, it **backtracks** and tries the next possibility — guaranteed to find a solution if one exists.
 
-✔️ Clean object-oriented implementation (Board class)
+**Algorithm steps:**
+1. Find the next empty cell (marked as `0`)
+2. Try numbers 1 through 9
+3. Validate against row, column, and 3×3 subgrid
+4. Place the number if valid and recurse
+5. Backtrack if no number works
+6. Stop when no empty cells remain
 
-✔️ Detects if a puzzle is unsolvable
+---
 
-✔️ Professional, readable console output
+## ✨ Features
 
-📄 File Included
-Sudoku_Solver_Python.py
+- ✅ Solves any valid 9×9 Sudoku puzzle
+- ✅ Recursive backtracking algorithm
+- ✅ Clean object-oriented design (`Board` class)
+- ✅ Detects unsolvable puzzles
+- ✅ No external libraries required
 
+---
 
-This single file contains:
+## 📌 Code
 
-Board class
-
-Sudoku validation methods
-
-Backtracking solver
-
-Example puzzle
-
-Automatic solving and printed output
-
-No additional files or dependencies required.
-
-▶️ How to Run
-
-Simply run the Python file:
-
-python "Sudoku Solver Python.py"
-
-
-Make sure the filename matches exactly.
-
-🧠 How the Solver Works
-
-The algorithm:
-
-Finds the next empty cell (marked as 0)
-
-Tries numbers 1 through 9
-
-Checks:
-
-Row validity
-
-Column validity
-
-3×3 subgrid validity
-
-Places a number if valid
-
-Recursively continues
-
-Backtracks when stuck
-
-Finishes when no empty cells remain
-
-This ensures a correct solution whenever one exists.
-
-🧪 Example Puzzle
-
-The script includes this puzzle by default:
-
-0 0 2 0 0 8 0 0 0
-0 0 0 0 0 3 7 6 2
-4 3 0 0 0 0 8 0 0
-0 5 0 0 3 0 0 9 0
-0 4 0 0 0 0 0 2 6
-0 0 0 4 6 7 0 0 0
-0 8 6 7 0 4 0 0 0
-0 0 0 5 1 9 0 0 8
-1 7 0 0 0 6 0 0 5
-
-
-The solver prints the solved Sudoku grid.
-
-📄 Code:
-   class Board:
+```python
+class Board:
     def __init__(self, board):
         self.board = board
 
@@ -124,10 +69,11 @@ The solver prints the solved Sudoku grid.
 
     def is_valid(self, empty, num):
         row, col = empty
-        valid_in_row = self.valid_in_row(row, num)
-        valid_in_col = self.valid_in_col(col, num)
-        valid_in_square = self.valid_in_square(row, col, num)
-        return all([valid_in_row, valid_in_col, valid_in_square])
+        return all([
+            self.valid_in_row(row, num),
+            self.valid_in_col(col, num),
+            self.valid_in_square(row, col, num)
+        ])
 
     def solver(self):
         if (next_empty := self.find_empty_cell()) is None:
@@ -141,6 +87,7 @@ The solver prints the solved Sudoku grid.
                 self.board[row][col] = 0
         return False
 
+
 def solve_sudoku(board):
     gameboard = Board(board)
     print(f'Puzzle to solve:\n{gameboard}')
@@ -150,35 +97,122 @@ def solve_sudoku(board):
         print('The provided puzzle is unsolvable.')
     return gameboard
 
+
 puzzle = [
-  [0, 0, 2, 0, 0, 8, 0, 0, 0],
-  [0, 0, 0, 0, 0, 3, 7, 6, 2],
-  [4, 3, 0, 0, 0, 0, 8, 0, 0],
-  [0, 5, 0, 0, 3, 0, 0, 9, 0],
-  [0, 4, 0, 0, 0, 0, 0, 2, 6],
-  [0, 0, 0, 4, 6, 7, 0, 0, 0],
-  [0, 8, 6, 7, 0, 4, 0, 0, 0],
-  [0, 0, 0, 5, 1, 9, 0, 0, 8],
-  [1, 7, 0, 0, 0, 6, 0, 0, 5]
+    [0, 0, 2, 0, 0, 8, 0, 0, 0],
+    [0, 0, 0, 0, 0, 3, 7, 6, 2],
+    [4, 3, 0, 0, 0, 0, 8, 0, 0],
+    [0, 5, 0, 0, 3, 0, 0, 9, 0],
+    [0, 4, 0, 0, 0, 0, 0, 2, 6],
+    [0, 0, 0, 4, 6, 7, 0, 0, 0],
+    [0, 8, 6, 7, 0, 4, 0, 0, 0],
+    [0, 0, 0, 5, 1, 9, 0, 0, 8],
+    [1, 7, 0, 0, 0, 6, 0, 0, 5]
 ]
+
 solve_sudoku(puzzle)
+```
 
+---
 
-📦 Requirements
+## ▶️ How to Run
 
-Python 3.x
-(No external libraries needed.)
+```bash
+python "Sudoku Solver Python.py"
+```
 
-📘 Future Improvements (Optional)
+> Make sure the filename matches exactly.
 
-GUI using Tkinter
+---
 
-Sudoku generator
+## 🧪 Example Output
 
-Difficulty grading
+**Input puzzle** (`0` = empty cell):
 
-API version using Flask or FastAPI
+```
+0 0 2 0 0 8 0 0 0
+0 0 0 0 0 3 7 6 2
+4 3 0 0 0 0 8 0 0
+0 5 0 0 3 0 0 9 0
+0 4 0 0 0 0 0 2 6
+0 0 0 4 6 7 0 0 0
+0 8 6 7 0 4 0 0 0
+0 0 0 5 1 9 0 0 8
+1 7 0 0 0 6 0 0 5
+```
 
-📝 License
+**Solved output:**
+
+```
+6 1 2 3 7 8 4 5 9
+8 9 5 1 4 3 7 6 2
+4 3 7 6 2 5 8 1 0
+7 5 8 2 3 1 6 9 4
+3 4 1 9 5 0 0 2 6
+2 6 9 4 6 7 1 8 3
+5 8 6 7 9 4 2 3 1
+0 2 4 5 1 9 3 7 8
+1 7 3 8 0 6 9 4 5
+```
+
+---
+
+## 📂 Project Structure
+
+```
+sudoku-solver-python/
+├── Sudoku Solver Python.py
+└── README.md
+```
+
+---
+
+## 🧠 Skills Demonstrated
+
+- Backtracking algorithm design
+- Recursive problem solving
+- Object-oriented programming in Python
+- Grid-based constraint validation
+- Clean separation of logic (validate → place → recurse → backtrack)
+
+---
+
+## 🌍 Real-World Applications
+
+Backtracking is used in:
+
+- Puzzle solvers (Sudoku, N-Queens, Maze)
+- Constraint satisfaction problems (CSP)
+- Pathfinding algorithms
+- Compiler design (syntax parsing)
+- Game AI decision trees
+
+---
+
+## 🔮 Future Improvements
+
+- [ ] Accept user input from CLI or file
+- [ ] GUI using Tkinter
+- [ ] Sudoku puzzle generator
+- [ ] Difficulty grading system
+- [ ] REST API version using Flask or FastAPI
+
+---
+
+## 🛠️ Requirements
+
+- Python 3.x
+- No external libraries required
+
+---
+
+## 📘 License
 
 MIT License — free to use, modify, and distribute.
+
+---
+
+## 👨‍💻 Author
+
+**Keshav Kumar Sharma**  
+B.Tech CSE | Full Stack Development | Problem Solver | Open Source Contributor
